@@ -1,0 +1,51 @@
+<!--
+
+{% extends "base.html" %}
+
+-->
+{% load static %}
+
+{% block content %}
+
+<div class="site-section">
+<div class="container">
+<div class="row justify-content-center">
+<div class="col-md-12">
+
+<a href="{% url 'profile' %}" class="text-black">Back to Profile</a>
+
+
+<div class="card">
+<div class="card-body"> 
+<h5 class="card-title"> Order: #{{ order.reference_number }}
+<h6 class="card-subtitle mb-2 text-muted">{{ order.ordered_date }}</h6>
+</h5>
+<hr />
+<h5 class="card-title">Your Order</h5>
+<div class="site-blocks-table">
+<table class="table">
+<thead>
+<tr>
+    <th>Product</th>
+    <th>Total</th>
+</tr>
+</thead>
+<tbody>
+{% for item in order.items.all %}
+<tr>
+<td>Size: {{ item.size.name }} Color: {{ item.color.name }} Type: {{ item.product.title }}</td>
+<td>${{ item.get_total_item_price }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
