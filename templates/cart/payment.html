@@ -1,4 +1,4 @@
-
+{% extends "base.html" %}
 
 {% load static %}
 {% block content %}
@@ -13,7 +13,7 @@
   transform-origin: 40px 40px;
 }
 .lds-heart div {
-  top: 32px;
+  top: 35px;
   left: 32px;
   position: absolute;
   width: 32px;
@@ -62,10 +62,10 @@
 
 </style>
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<div class="container">
+
+<div class="container" style="margin-top:24vh;display:grid;justify-content: center;align-content:center;width:100%">
 <div class="row justify-content-center">
-<div class="col-md-6">
+
 
 <div class="alert alert-successful" role="alert" id="alertSuccess" style="display: none;">
 Your payment was successful
@@ -78,12 +78,20 @@ Your payment failed, please try again
 
 </div>
 <div id="paymentInfo">
-<p style="font-size:2.5rem">Order total: $ {{ order.get_total }}</p>
+<p style="font-size:2.5rem">Order total: $<strong> {{ order.get_total }}</strong></p>
+          
+
+                    {% for item in order.items.all %}
+  {{ item.product.title }}
+                        <img src="{{ item.product.image.url }}" class="img-fluid" style="height:8rem">
+                    {{ item.product.active }}
+                    {{ item.product.id }}
+       {% endfor %}
 <h3>Select a payment method</h3>
 <div id="paypal-button-container"></div>
 </div>
 </div>
-</div>
+
 </div>
 {% endblock content %}
 
@@ -146,6 +154,7 @@ Your payment failed, please try again
     },
      onApprove: function(data, actions) {   
         toggleLoader(true);
+
         return actions.order.capture().then(function(details) {
 
            sendOrderConfirmed(details).then(res => {

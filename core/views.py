@@ -6,7 +6,7 @@ from django.core.mail import send_mail
 from django.views import generic
 from cart.models import Order, Product
 from .forms import ContactForm
-from cart.models import Product
+from .models import Listing
 from django_anysign import api as django_anysign
 from django_docusign import api as django_docusign
 
@@ -31,6 +31,7 @@ class ProfileView(LoginRequiredMixin, generic.TemplateView):
 class HomeView(generic.TemplateView):
     template_name = 'index.html'
     queryset = Product.objects.all()
+    paginate_by = 1
     context_object_name = 'products'
 
 

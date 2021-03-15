@@ -7,6 +7,17 @@ from django.utils.text import slugify
 User = get_user_model()
 
 
+
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+
+
+    class Meta:
+        verbose_name = "Categories"
+
+    def __str__(self):
+        return self.name
+
 class Address(models.Model):
 
     ADDRESS_CHOICES = (
@@ -50,8 +61,12 @@ class Product(models.Model):
     price = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=False)
     available_colors = models.ManyToManyField(ColorVariation)
     available_sizes = models.ManyToManyField(SizeVariation)
+    primary_category = models.ForeignKey(Category, related_name='primary_products', on_delete=models.CASCADE)
+    secondary_categories = models.ManyToManyField(Category, blank=True)
+    stock = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
@@ -69,12 +84,20 @@ class Product(models.Model):
     def get_price(self):
         return "{:.2f}".format(self.price / 100)
 
+    @property
+    def in_stock(self):
+        return self.stock > 0
+
+    def out_stock(self):
+        return self.stock - 1
+
+
+
 class OrderItem(models.Model):
     order = models.ForeignKey("Order", related_name='items', on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)    
     quantity = models.PositiveIntegerField(default=1)
-    color = models.ForeignKey(ColorVariation, on_delete=models.CASCADE)
-    size = models.ForeignKey(SizeVariation, on_delete=models.CASCADE)
+    newCard = 1
 
     def __str__(self):
         return f"{self.quantity} x {self.product.title}"
@@ -85,6 +108,9 @@ class OrderItem(models.Model):
     def get_total_item_price(self):
         price = self.get_raw_total_item_price()
         return "{:.2f}".format(price / 100)
+
+    def cards(self):
+        return self.newCard * self.product.price     
 
 
 
@@ -126,7 +152,7 @@ class Order(models.Model):
 
 
 class Payment(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='payments')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='payments')  
     payment_method = models.CharField(max_length=20, choices=(
         ('Paypal', 'Paypal'),
         ))
@@ -134,14 +160,20 @@ class Payment(models.Model):
     successful = models.BooleanField(default=False)
     amount = models.FloatField()
     raw_response = models.TextField()
+    stocks = models.ManyToManyField(Product)
 
     def __str__(self):
         return self.reference_number
 
+    def out_stock(self):
+        return self.stocks - 1
 
     @property
     def reference_number(self):
         return f"PAYMENT-{self.order}-{self.pk}"
+
+    def get_price(self):
+        return self.product.price
 
 
 

@@ -1,8 +1,8 @@
-from .models import Order
+from .models import Order, Product
 
 def get_or_set_order_session(request):
     order_id = request.session.get('order_id', None)
-       
+    product_id = request.session.get('product_id', None)   
     if order_id is None:
         order = Order()
         order.save()

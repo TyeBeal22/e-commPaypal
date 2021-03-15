@@ -68,6 +68,28 @@
 ====================================================================
 
  ***/
+
+
+@media (min-width: 900px) {
+  .products { grid-template-columns: repeat(2, 1fr); }
+}
+
+
+.inner {
+  overflow: hidden;
+}
+
+.inner img {
+  transition: all 1.5s ease;
+}
+
+
+.inner:hover img {
+  transform: scale(1.5);
+}
+
+
+
 #loader-wrapper {
   position: fixed;
   top: 0;
@@ -158,6 +180,8 @@ animation-delay: .8s;
 ====================================================================
 
  ***/
+
+
 
  @font-face {
   font-family: 'font-awesome';
@@ -285,6 +309,9 @@ animation-delay: .8s;
   border-color:#d73e4d;
   border-style: solid;
 }
+
+
+
 /*** 
 
 ====================================================================
@@ -302,7 +329,7 @@ animation-delay: .8s;
 }
 .theme-main-menu .navbar-nav>li>a {
   text-transform: uppercase;
-  color:#fff;
+  color:#e8ded2;
   font-weight: 700;
   background: transparent;
   padding: 9px 15px;
@@ -680,10 +707,12 @@ animation-delay: .8s;
   text-align: center;
   padding: 134px 0 137px 0;
 }
+
 .page-middle-banner .opacity h3 {
   color: #fff;
   margin-bottom: 25px;
 }
+
 .page-middle-banner .opacity a {
   width: 200px;
   line-height: 45px;
@@ -1253,8 +1282,7 @@ animation-delay: .8s;
 
  ***/
 footer {
-  margin: 100px 0 0 0;
-  background: #1e1e1e;
+  margin: 0 0 0 0;
   padding: 60px 0 25px 0;
   text-align: center;
 }

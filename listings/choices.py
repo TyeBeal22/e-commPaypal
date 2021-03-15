@@ -1,0 +1,45 @@
+
+
+price_choices = {
+  '100000':'$100,000',
+  '200000':'$200,000',
+  '300000':'$300,000',
+  '400000':'$400,000',
+  '500000':'$500,000',
+  '600000':'$600,000',
+  '700000':'$700,000',
+  '800000':'$800,000',
+  '900000':'$900,000',
+  '1000000':'$1M+',
+}
+
+state_choices = {
+        'AK': 'Astros',
+        'GU': 'Bulls',        
+        'BC': 'Celtics',
+        'CO': 'Cowboys',
+        'KC': 'Chiefs',
+        'DE': 'Dodgers',
+        'FL': 'Florida',
+        'NG': 'Giants',
+        'HI': 'Hawks',
+        'UT': 'Jazz',
+        'KY': 'Lions',
+        'LA': 'Lakers',
+        'DA': 'Mavericks',
+        'MD': 'Maryland',
+        'NA': 'National',
+        'DC': 'Nats',
+        'NJ': 'New Jersey',
+        'NV': 'Nevada',
+        'NO': 'Pelicans',
+        'PA': 'Patriots',
+        'PR': 'RedSox',
+        'WS': 'Redskins',
+        'SC': 'Seahawks',
+        'SD': 'Steelers',
+        'TN': 'Titans',
+        'WA': 'Wizards',
+        'GS': 'Warriors',
+        'NY': 'Yankess'
+}

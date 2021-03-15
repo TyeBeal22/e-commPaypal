@@ -1,8 +1,8 @@
 from django.contrib.auth import get_user_model
 from django import forms
 from .models import (
-    OrderItem, ColorVariation, 
-    Product, SizeVariation, Address
+    OrderItem, ColorVariation,
+    Product, Address, SizeVariation,
 )
 
 User = get_user_model()
@@ -22,19 +22,19 @@ class AddToCartForm(forms.ModelForm):
         product = Product.objects.get(id=product_id)
         super().__init__(*args, **kwargs)
 
+
         self.fields['color'].queryset = product.available_colors.all()
         self.fields['size'].queryset = product.available_sizes.all()
 
 
+
 class AddressForm(forms.Form):
     shipping_address_line_1 = forms.CharField(required=False)
-    shipping_address_line_2 = forms.CharField(required=False)
     shipping_zip_code = forms.CharField(required=False)
     shipping_city = forms.CharField(required=False)
 
 
     billing_address_line_1 = forms.CharField(required=False)
-    billing_address_line_2 = forms.CharField(required=False)
     billing_zip_code = forms.CharField(required=False)
     billing_city = forms.CharField(required=False)
 
@@ -71,8 +71,6 @@ class AddressForm(forms.Form):
         if selected_shipping_address is None:
             if not data.get('shipping_address_line_1', None):
                 self.add_error("shipping_address_line_1", "Please fill in this field")
-            if not data.get('shipping_address_line_2', None):
-                self.add_error("shipping_address_line_2", "Please fill in this field")
             if not data.get('shipping_zip_code', None):
                 self.add_error("shipping_zip_code", "Please fill in this field")
             if not data.get('shipping_city', None):               
@@ -83,8 +81,6 @@ class AddressForm(forms.Form):
         if selected_billing_address is None:
             if not data.get('billing_address_line_1', None):
                 self.add_error("billing_address_line_1", "Please fill in this field")
-            if not data.get('billing_address_line_2', None):
-                self.add_error("billing_address_line_2", "Please fill in this field")
             if not data.get('billing_zip_code', None):
                 self.add_error("billing_zip_code", "Please fill in this field")
             if not data.get('billing_city', None):               
@@ -92,3 +88,9 @@ class AddressForm(forms.Form):
 
 
 
+class UpdateProduct(forms.ModelForm):
+
+
+    class Meta:
+        model = Product
+        fields = ['stock','id']

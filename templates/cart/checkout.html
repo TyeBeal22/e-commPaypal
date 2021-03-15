@@ -1,13 +1,16 @@
-
+{% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
+
+
+<!--
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <div class="bg-dark py-3">
     <div class="container">
         <div class="row">
             <div class="col-md-12 mb-0">
-            <a href="{% url 'home' %}">
+            <a href="/">
                 Home
             </a>
                 <span class="mx-2 mb-0">/</span>
@@ -18,33 +21,22 @@
         </div>
     </div>
 </div>
+-->
 
 
 
 
 
-
-<div class="site-section">
+<div class="site-section" style="margin-top:10%">
     <div class="container">
             <div class="row mb-5">
         
 
-                {% if not request.user.is_authenticated %}
+       
 
 
 
-                            <div class="col-md-12" style="margin-top:15%;width:50%">
-                        <div class="border p-4 rounded" role="alert">
-                            You are nearly finished with your order.
-                            Please <a href="{% url 'account_login' %}">Login</a> to finalize or <a href="{% url 'account_signup' %}">Sign Up</a>
 
-                        </div>
-
-
-
-                        </div>
-                    
-                {% else %}
 
            
                     <form method="POST">
@@ -80,7 +72,7 @@
                         <img src="{{ item.product.image.url }}" class="img-fluid">
                     </td>
                     <td class="product-name">
-                    {{ item.size.name }}, {{ item.color.name }} {{ item.product.title }}
+                        {{ item.product.title }}
                     <strong class="mx-2"> x </strong> {{ item.quantity }} 
                      </td>                   
                      <td>
@@ -107,7 +99,6 @@
 
                     </form>
 
-                {% endif %} 
                          </div>    
         </div>
 </div>

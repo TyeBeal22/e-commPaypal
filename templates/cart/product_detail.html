@@ -1,24 +1,22 @@
-
+{% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<div class="bg-dark py-3">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 mb-0">
-            <a href="{% url 'home' %}">
-Home
-            </a>
-                <span class="mx-2 mb-0">/</span>
-                <strong class="text-black">{{ product.title }}</strong>
-            </div>
-        </div>
-    </div>
-</div>
 
 
-<div class="site-section"  style="margin-top:10%">
+<style>
+
+
+.site-section {
+    margin-top:20vh;
+}
+
+
+
+
+</style>
+
+<div class="site-section"  style="margin-bottom:1.5rem;display:flex">
     <div class="container">
         <div class="row mb-5">
             <div class="col-md-6">
@@ -29,9 +27,9 @@ Home
 
                 <h2> {{ product.title }} </h2>
                 <p class="mb-0">{{ product.description}}</p>
-                <form method="POST">
+                <form method="POST" style="width:7vw">
                 {% csrf_token %}
-                {{ form| crispy }}
+              {{ form| crispy }} 
                 <button type='submit' class="btn btn-sm btn-primary buy-now">Add to Cart</button>
                 </form>
                 </div>

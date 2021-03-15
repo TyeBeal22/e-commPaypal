@@ -14,15 +14,16 @@ ALLOWED_HOSTS = ['*']
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 INSTALLED_APPS = [
-    'django_docusign',
-    'django_anysign',
+    'pages.apps.PagesConfig',
+    'listings.apps.ListingsConfig',
+    'contacts.apps.ContactsConfig',    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'django.contrib.humanize',
     'django.contrib.sites',
     'allauth',
     'allauth.account',

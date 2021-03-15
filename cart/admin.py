@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import (
     Product, OrderItem, 
     Order, ColorVariation,
-    SizeVariation, Address, Payment
+    SizeVariation, Address, Payment, Category
 )
 
 class AddressAdmin(admin.ModelAdmin):
@@ -14,6 +14,7 @@ class AddressAdmin(admin.ModelAdmin):
         'address_type'
     ]
 
+admin.site.register(Category)
 admin.site.register(Product)
 admin.site.register(OrderItem)
 admin.site.register(Order)
