@@ -50,7 +50,6 @@ class Product(models.Model):
     price = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    active = models.BooleanField(default=False)
     available_colors = models.ManyToManyField(ColorVariation)
     available_sizes = models.ManyToManyField(SizeVariation)
 
